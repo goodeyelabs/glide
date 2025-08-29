@@ -7,10 +7,14 @@ on:
     branches:
       - main
       - master
+    paths-ignore:
+      - ".github/workflows/controlfront.yml"
   pull_request:
     branches:
       - main
       - master
+    paths-ignore:
+      - ".github/workflows/controlfront.yml"
   workflow_dispatch:
 jobs:
   scan:
@@ -26,7 +30,7 @@ jobs:
         run: npx -y @controlfront/cli@latest scan
         env:
           NEXT_PUBLIC_APP_URL: https://app.controlfront.io
-          CF_ORG_ID: 5392c3ed-c734-42c5-a6eb-77401cd6ad84
-          CF_PROJECT_ID: aaebd8de-90c3-4953-bbc2-8274ae28e97f
+          CF_ORG_ID: c6c6cdfa-15bb-4233-98d1-501a6c134da0
+          CF_PROJECT_ID: 900454ce-4488-410f-acb2-4f8032705fa4
           CF_CI_MODE: "true"
-          CF_INGEST_TOKEN: aGWXT8kWd2Jgq60qcW6D1U5I_CzfGAksORCVkv7k7OM
+          CF_INGEST_TOKEN: EE9JmdqLem756Fbr4QxPnzPyglZcyVMiNwpsc2r5Xyw
