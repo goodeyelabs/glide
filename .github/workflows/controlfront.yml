@@ -8,14 +8,21 @@ on:
       - main
       - master
     paths-ignore:
-      - ".github/workflows/controlfront.yml"
+      - ".github/workflows/*.yml"
+      - ".github/workflows/*.yaml"
   pull_request:
     branches:
       - main
       - master
     paths-ignore:
-      - ".github/workflows/controlfront.yml"
+      - ".github/workflows/*.yml"
+      - ".github/workflows/*.yaml"
   workflow_dispatch:
+    inputs:
+      cf_user_id:
+        description: "ControlFront user ID triggering the scan"
+        required: false
+        type: string
 jobs:
   scan:
     runs-on: ubuntu-latest
@@ -26,11 +33,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+      - name: Log triggering user ID
+        run: echo "cf_user_id is ${{ github.event.inputs.cf_user_id }}"
       - name: Run ControlFront scan (CI mode)
         run: npx -y @controlfront/cli@latest scan
         env:
           NEXT_PUBLIC_APP_URL: https://app.controlfront.io
-          CF_ORG_ID: c6c6cdfa-15bb-4233-98d1-501a6c134da0
-          CF_PROJECT_ID: 900454ce-4488-410f-acb2-4f8032705fa4
+          CF_ORG_ID: 2808cf9f-38bf-428b-8974-6831be906736
+          CF_PROJECT_ID: 2c5b10ea-4751-4069-8cc1-749877b40b6f
           CF_CI_MODE: "true"
-          CF_INGEST_TOKEN: EE9JmdqLem756Fbr4QxPnzPyglZcyVMiNwpsc2r5Xyw
+          CF_INGEST_TOKEN: k4jdMztGsaOdSZNnkxhsj33W-AViTtjzfJLQRp0p6ew
